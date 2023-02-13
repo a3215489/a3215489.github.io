@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+    <head>
+        <meta charset="UTF-8">
+        <title>歌单 | 莎莎快乐堡</title>
+        <meta name="author" content="">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <link rel="icon" href="/images/tx1.png">
+        <script src="https://cdn.staticfile.org/vue/3.2.45/vue.global.prod.min.js"></script>
+        <script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.2.1/css/all.min.css">
+        
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        
+      
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+    <meta name="generator" content="Hexo 6.3.0">
+		<script>
+		var i;
+function loadXMLDoc()
+{
+  var xmlhttp;
+  if (window.XMLHttpRequest)
+  {
+    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+    xmlhttp=new XMLHttpRequest();
+  }
+  else
+  {
+    // IE6, IE5 浏览器执行代码
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function()
+  {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+	  var myArr = JSON.parse(this.responseText);
+      myFunction(myArr)
+    }
+  }
+  xmlhttp.open("GET","./gd.json",true);
+  xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xmlhttp.send();
+}
+function myFunction(arr) {
+  var out1 = "";
+  var out2 = "";
+  var out3 = "";
+  var out4 = "";
+  for(i = 0; i < arr.length; i++) {
+      if(arr[i].zl==1) { out1 += '<div id="'+ arr[i].id +'" onclick="handleDivCopy(this.id)" style="cursor:pointer">' + arr[i].gm +'</div>';}
+      if(arr[i].zl==2) { out2 += '<div id="'+ arr[i].id +'" onclick="handleDivCopy(this.id)" style="cursor:pointer">' + arr[i].gm +'</div>';}
+      if(arr[i].zl==3) { out3 += '<div id="'+ arr[i].id +'" onclick="handleDivCopy(this.id)" style="cursor:pointer">' + arr[i].gm +'</div>';}
+      if(arr[i].zl==4) { out4 += '<div id="'+ arr[i].id +'" onclick="handleDivCopy(this.id)" style="cursor:pointer">' + arr[i].gm +'</div>';}
+    // out += 'id:' + arr[i].id + '歌名:' + arr[i].gm + '<br>';
+	//'<div id="'+ arr[i].id +'" onclick="handleDivCopy(this.id)">' + arr[i].gm +'</div>'
+  }
+ document.getElementById("myDiv1").innerHTML=out1;
+ document.getElementById("myDiv2").innerHTML=out2;
+ document.getElementById("myDiv3").innerHTML=out3;
+ document.getElementById("myDiv4").innerHTML=out4;
+ document.getElementById("num").innerHTML=i-1;
+}
+// 复制 div 内容
+    function handleDivCopy(name) {
+      const div = document.getElementById(name);
+      const input = document.createElement("input");
+      document.body.appendChild(input);
+      input.value = "点歌：" + div.innerText;
+      input.select();
+       
+      try {
+        if (document.execCommand("copy", false)) {
+          handleDomMsg("div 内容复制成功");
+        } else {
+          handleDomMsg("div 内容复制失败");
+        }
+      } catch (error) {
+        console.log(error, "error")
+      } finally {
+        input.remove();
+      }
+    };
+// 随机点歌
+	function randomCopy() {
+	  const name = Math.floor(Math.random() * i);
+	  alert(name);
+      const div = document.getElementById(name);
+      const input = document.createElement("input");
+      document.body.appendChild(input);
+      input.value = "点歌：" + div.innerText;
+      input.select();
+       
+      try {
+        if (document.execCommand("copy", false)) {
+          handleDomMsg("div 内容复制成功");
+        } else {
+          handleDomMsg("div 内容复制失败");
+        }
+      } catch (error) {
+        console.log(error, "error")
+      } finally {
+        input.remove();
+      }
+    };
+</script>
+</head>
+    <body onload="loadXMLDoc()">
+        <div id="loading" style="height: 100vh; width: 100vw; left: 0; top: 0; position: fixed; display: flex; z-index: 2147483647; justify-content: space-between; background: #fff; transition: opacity 0.3s ease-out, visibility 0.3s; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none">
+    <div style="position: fixed; height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center">
+        <div id="loadcontent" style="width: 50vmin; height: 50vmin; padding: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: solid 10px #a3ddfb; text-align: center">
+            <div>
+                <h2>LOADING...</h2>
+                <p style="word-break: keep-all">加载过慢请开启缓存（浏览器默认开启）</p>
+                <img alt="loading" src="/images/loading.gif" style="height: 200px">
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div id="layout">
+            <transition name="into">
+            <div id="main" v-show="showpage" style="display: -not-none">
+                <nav id="menu">
+    <div class="desktop-menu">
+        <a class="title" href="/">
+            <span>莎莎快乐堡</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;首页</span>
+        </a>
+        
+        <a href="/html/1.html">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;歌单</span>
+        </a>
+        
+        
+    </div>
+    <div :class="&quot;phone-menu &quot; + menushow" id="phone-menu">
+        <div class="curtain" @click="menushow = !menushow" v-show="menushow"></div>
+        <div class="title" @click="menushow = !menushow">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;莎莎快乐堡</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menushow">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
+                </div>
+            </a>
+            
+            <a href="/html/1.html">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">歌单</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+
+<div class="article">
+    <div>
+        <h1>莎莎的歌单 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            更新日期：2023/2/2
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        
+		<div class="wapper">
+<div class="main_bg">
+	<div class="main_con1">
+		<div class="left_img">
+			<img src=""/>
+		</div>
+		<div class="desc_right">
+			<div class="text">
+				当前曲库容量：<nobr id="num"></nobr>
+                <p>点击这里领取你的赛博甜心：<a href="https://live.bilibili.com/108238">路易莎的直播间</a></p>
+                <p>不知道听什么？试试 &nbsp;<a onclick="randomCopy()" style="cursor:pointer">随便听听</a></p>
+                <p>tips： 点击歌名可以复制</p>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="main_line">
+
+</div>
+<table style="font-family:">
+	<tr>
+		<th style="font-size: 28px;">流行</th>
+		<th style="font-size: 28px;">古风</th>
+		<th style="font-size: 28px;">日语</th>
+		<th style="font-size: 28px;">英语</th>
+	</tr>
+    <tr>
+        <td id="myDiv1" valign="top">
+        </td>
+        <td id="myDiv2" valign="top">
+        </td>
+        <td id="myDiv3" valign="top">
+        </td>
+        <td id="myDiv4" valign="top">
+        </td>
+    </tr>
+</table>
+</div>
+</div>
+</div>
+</div>  
+
+
+    
+    
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 莎莎快乐堡
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;
+        </div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp; <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+
+            </div>
+            </transition>
+            <div id="showimg">
+                <img id="showimg-content">
+            </div>
+        </div>
+        <script src="/js/functions.js"></script>
+<script src="/js/particlex.js"></script>
+    </form>
+</body>
+</html>
